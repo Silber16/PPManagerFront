@@ -1,0 +1,23 @@
+GET https://localhost:7158/Project HTTP/1.1
+
+###
+
+POST https://localhost:7158/Account/Login HTTP/1.1
+Content-Type: application/json
+
+{
+    "Email": "chau@gmail.com",
+    "Password": "Chau222!",
+    "RememberMe": true
+  
+}
+
+###
+
+PATCH https://localhost:7158/Project/Edit/24 HTTP/1.1
+Content-Type: application/json
+
+{
+    "Title": "titulo 11",
+    "Desc": "Hola desc 1"
+}
