@@ -1,15 +1,26 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import Projects from "./Projects"
 
 export default function Home() {
 
-    const [isRegistered, setIsRegistered] = useState(false)
-    setIsRegistered(true)
+    const [isLoggedIn, setIsLoggedIn] = useState(false)
+    
+    useEffect(() => {
+      
+        const userCookie = document.cookie.split('; ').find(row => row.startsWith('.AspNetCore.Identity.Application='));
+        if (userCookie) {
+            setIsLoggedIn(true);
+        } else {
+            setIsLoggedIn(false);
+        }
+
+    }, [])
+    
 
   return (
    <section>
-       {isRegistered ? 
+       {isLoggedIn ? 
        (
             <>
                 <header>
