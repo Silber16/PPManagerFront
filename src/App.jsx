@@ -1,4 +1,4 @@
-import { BrowserRouter, Link, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import './App.css'
 import Register from './components/Register'
 import Login from './components/Login'
@@ -6,6 +6,7 @@ import Projects from './components/Projects'
 import CreateProject from './components/CreateProject'
 import ProjectDetail from './components/ProjectDetail'
 import EditProject from './components/EditProjectModal'
+import Home from './components/Home'
 
 function App() {
 
@@ -17,8 +18,8 @@ function App() {
             <h1>Title</h1>
         </header>
 
-        <Link to={'/Login'} >login</Link>
-        <Link to={'/Project'} >Projects</Link>
+        <Home />
+
         <Routes>
             <Route path='/Register' element={<Register />} />
             <Route path='/Login' element={<Login />} />

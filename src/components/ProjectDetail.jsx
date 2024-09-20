@@ -11,7 +11,7 @@ export default function ProjectDetail() {
     const {id} = useParams()
     useEffect(() => {
 
-        axios.get(`https://localhost:7158/Project/Detail/${id}`)
+        axios.get(`https://localhost:7158/Project/Detail/${id}`, {withCredentials:true})
         .then(res => {
           
             if (res.data != null) {

@@ -6,7 +6,7 @@ export default function EditProjectModal({show, onClose, id}) {
     const {register, handleSubmit} = useForm();
 
     async function Send(data) {
-         await axios.patch(`https://localhost:7158/Project/Edit/${id}`, data) 
+         await axios.patch(`https://localhost:7158/Project/Edit/${id}`, data, {withCredentials:true}) 
             .then(response => {
                 if (response.status == 200) {
                     console.log("ok")
