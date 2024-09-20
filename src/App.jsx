@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Link, Route, Routes } from 'react-router-dom'
 import './App.css'
 import Register from './components/Register'
 import Login from './components/Login'
@@ -17,6 +17,8 @@ function App() {
             <h1>Title</h1>
         </header>
 
+        <Link to={'/Login'} >login</Link>
+        <Link to={'/Project'} >Projects</Link>
         <Routes>
             <Route path='/Register' element={<Register />} />
             <Route path='/Login' element={<Login />} />
