@@ -18,9 +18,8 @@ function App() {
             <h1>Title</h1>
         </header>
 
-        <Home />
-
         <Routes>
+            <Route path='/' element={<Home />} />
             <Route path='/Register' element={<Register />} />
             <Route path='/Login' element={<Login />} />
             <Route path='/Project' element={<Projects />} />

@@ -1,23 +1,20 @@
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import Projects from "./Projects"
+import axios from "axios"
 
 export default function Home() {
 
     const [isLoggedIn, setIsLoggedIn] = useState(false)
     
     useEffect(() => {
-      
-        const userCookie = document.cookie.split('; ').find(row => row.startsWith('.AspNetCore.Identity.Application='));
-        if (userCookie) {
-            setIsLoggedIn(true);
-        } else {
-            setIsLoggedIn(false);
-        }
-
+        axios.get('https://localhost:7158/Account/CheckAuth', {withCredentials:true})
+            .then(res => {
+                setIsLoggedIn(res.data.isAuthenticated)
+            })
+            .catch(setIsLoggedIn(false))
     }, [])
     
-
   return (
    <section>
        {isLoggedIn ? 

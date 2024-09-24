@@ -8,7 +8,6 @@ export default function Login() {
   const {register, handleSubmit} = useForm();
 
    async function Send(data) {
-    console.log(data)
         await axios.post(`https://localhost:7158/Account/Login`, data, {withCredentials: true}) 
         .then(res => console.log(res))
       }

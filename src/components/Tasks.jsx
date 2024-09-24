@@ -39,9 +39,12 @@ export default function Tasks({projectTasks, projectId}) {
         };
         
         axios.post("https://localhost:7158/Tasks/Create", task)
-            .then(
-                setTasks([...tasks, task])
-            )
+            .then(res => {
+                if (res.status == 200 || res.status == 201) {
+                    setTasks([...tasks, task])
+                    window.location.reload();
+                }
+            })
             .catch(e => console.error(e))
     }
 

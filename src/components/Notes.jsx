@@ -20,8 +20,13 @@ export default function Notes({projectNotes, projectId}) {
     };
     
     axios.post("https://localhost:7158/Note/Create", note)
-        .then(
-            setNotes([...notes, note])
+        .then(res => {
+            if (res.status == 200 || res.status == 201) {
+                setNotes([...notes, note])
+                window.location.reload();
+            }
+        }
+            
         )
         .catch(e => console.error(e))
   }   

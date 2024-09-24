@@ -1,6 +1,5 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
 import Project from './Project'
 
 export default function Projects() {
@@ -11,7 +10,6 @@ export default function Projects() {
        
         axios.get(`https://localhost:7158/Project`, { withCredentials: true })
         .then(res => {
-            console.log(res)
             if (res.data.length <= 0) {
                 return "empty"
             }
@@ -41,20 +39,15 @@ export default function Projects() {
       }
       
   return (
-    <section>
-        <h2>Projects</h2>
-            <div>
-            {projects ? (
-                projects.map((project, index) => (
-                   <Project 
-                      project={project} 
-                      key={index}
-                      DeleteProject={DeleteProject}
-                   />
-                ))) : (<p>You dont have projects already</p>)}
-            </div>
-            <Link to={"/Project/Create"} >Create a new project</Link>
-           
+    <section>    
+         {projects ? (
+            projects.map((project, index) => (
+              <Project 
+                project={project} 
+                key={index}
+                DeleteProject={DeleteProject}
+              />
+          ))) : (<p>You dont have projects already</p>)} 
     </section>
   )
 }
