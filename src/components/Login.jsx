@@ -9,21 +9,28 @@ export default function Login() {
 
    async function Send(data) {
         await axios.post(`https://localhost:7158/Account/Login`, data, {withCredentials: true}) 
-        .then(res => console.log(res))
+        .then(() => {
+            window.location.href = "/";
+        })
+        .catch(e => console.error("login errror: ", e) )
       }
 
   return (
-        <section>
-            <h2>Login</h2>
-            <form onSubmit={handleSubmit(Send)}>
-                <label htmlFor="">Email</label>
-                <input type="email" name="Email"{...register("Email")}/>
-                <label htmlFor="">Password</label>
-                <input type="password" name="Password" {...register("Password")}/>
-                <label htmlFor="">RememberMe</label>
-                <input type="checkbox" name="RememberMe" {...register("RememberMe")}/>
-                <hr />
-                <button type="submit">Login</button>
+        <section className='login-register-sec'>
+            <Link to={'/'} className='login-register__btns--btn'>
+            <span className="material-symbols-outlined arrow-back">arrow_back</span>
+            </Link>
+            <label className='login-register-sec__lbl'>Login</label>
+            <form className='login-register-sec__form' onSubmit={handleSubmit(Send)}>
+                <div className='login-register-sec__form--inpts'>
+                    <input placeholder='Email' type="email" name="Email"{...register("Email")}/>
+                    <input placeholder='Password' type="password" name="Password" {...register("Password")}/>
+                    <div className='login-register-sec__form--inpts__rm'>
+                        <label style={{margin: '0 .3rem', fontSize: '1.1rem'}} htmlFor="">Remember me</label>
+                        <input style={{margin: '0 .3rem', padding:'.5rem'}} type="checkbox" name="RememberMe" {...register("RememberMe")}/>
+                    </div>
+                </div>
+                <button className='login-register-sec__form--submit' type="submit">Login</button>
             </form>
             <p>You are not registered? <Link to={`/Register`}>Register</Link></p>
         </section>  

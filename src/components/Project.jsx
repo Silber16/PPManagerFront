@@ -10,16 +10,21 @@ export default function Project({project, DeleteProject}) {
     const onClose = () => setShowModal(false);
     const onShow = () => setShowModal(true);
 
+
   return (
     <>
       {project 
       ?(
-          <div>
-          <h3>{project.title}</h3>
-          <p>{project.desc}</p>
-          <Link to={`/Project/Detail/${project.id}`}>Acces</Link>
-          <button onClick={onShow}>Edit Project</button>
-          <button onClick={() => DeleteProject(project.id)}>Delete Project</button>
+          <div className="projectContainer">
+            <div className="projectContainer__info">
+              <h3 className="projectContainer__info--title">{project.title}</h3>
+              <p className="projectContainer__info--desc">{project.desc}</p>
+              <Link to={`/Project/Detail/${project.id}`} className="projectContainer__info--detail">ACCES</Link>
+            </div>
+            <div className="projectContainer__options">
+              <button onClick={onShow} className="projectContainer__options--edit"><span className="material-symbols-outlined">edit_note</span></button>
+              <button onClick={() => DeleteProject(project.id)} className="projectContainer__options--delete"><span className="material-symbols-outlined">delete</span></button>
+            </div>
           </div>
        )
       : (console.log("project is null"))
@@ -29,7 +34,7 @@ export default function Project({project, DeleteProject}) {
         onClose={onClose}
         id={project.id}
       ></EditProjectModal>
-      <hr />
+     
     </>
   )
 }

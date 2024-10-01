@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CreateModal from "./CreateModal";
 import axios from "axios";
 import { useForm } from "react-hook-form";
@@ -11,10 +11,22 @@ export default function Tasks({projectTasks, projectId}) {
     const [showCreateModal, setShowCreateModal] = useState(false);
     const [editingTask, setEditingTask] = useState();
     const [isEditing, setIsEditing] = useState(false);
+    const [seeAll, setSeeAll] = useState(false)
+    const [taskToMap, setTaskToMap] = useState(tasks.slice(0,3))
 
-    const firstThree = true;
     const firstThreeTask = tasks.slice(0,3);
-    const tasksToMap = firstThree ? firstThreeTask : tasks;
+
+    useEffect(() => {
+        if (seeAll) {
+            setTaskToMap(tasks); 
+        } else {
+            setTaskToMap(firstThreeTask); 
+        }
+    }, [seeAll]); 
+    
+    const seeAllTask = () => {
+        setSeeAll(!seeAll);
+    };
 
     async function edit(bool ,task)
         { 
@@ -28,7 +40,8 @@ export default function Tasks({projectTasks, projectId}) {
 
             setValue("Title", task.title);
             setValue("Desc", task.desc);
-            setValue("PriorityLevel", task.priorityLevel);
+            setValue("PriorityLevel", Number(task.priorityLevel));
+            setValue("DateLimit", task.dateLimit)
         }
 
     async function handleCreateTask(task) {
@@ -90,65 +103,108 @@ export default function Tasks({projectTasks, projectId}) {
         }
     }
 
+
   return (
-    <section>
-        <h4>Tasks</h4>
-        <button onClick={() => setShowCreateModal(true)}>Create Task</button>
+    <section className="tasks-sec">
+        <header className="task-sec__header">
+            <label className="header--title">Tasks</label>
+            <button onClick={() => setShowCreateModal(true)} className="header--createTask">Create Task</button>
+        </header>
+        {isEditing ? (
+            <div className="edit-t-p">
+                <label>Edit Task</label>
+                <form className="edit-t-p__form" onSubmit={handleSubmit(send)}>
+                    <div className="edit-t-p__form--inputs">
+                        <div>
+                            <label>
+                                Title:
+                            </label>
+                            <input
+                                type="text"
+                                {...register("Title")}
+                                maxLength={25}
+                            />
+                        </div>
+                        <div>
+                            <label>
+                                Description:
+                            </label>
+                            <input
+                                type="text"
+                                {...register("Desc")}
+                                maxLength={50}
+                            />
+                        </div>
+                        <div>
+                            <label>
+                                Priority:
+                            </label>
+                            <select {...register("PriorityLevel")}>
+                                <option value={1}>Low</option>
+                                <option value={2}>Medium</option>
+                                <option value={3}>High</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label>
+                                Date limit:
+                            </label>
+                            <input
+                                type="date"
+                                {...register("DateLimit")}
+                            />
+                        </div>
+                    </div>
+                    <div className="edit-t-p__form--btns">
+                        <button className="edit-t-p__form--submitBtn" type="submit" >
+                            <span className="material-symbols-outlined">check</span>
+                        </button>
+                        <button className="edit-t-p__form--cancelBtn" onClick={() => { edit(false, null)}}>
+                            <span className="material-symbols-outlined">close</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+            ) : (
+            <ul className="tasks-sec__tasks-container">
+                {tasks.length > 0 
+                    ? (taskToMap.map(task => (
+                            <li className="task-container" key={task.id}>
+                            <div className="task-container__info"
+                                 style={
+                                    task.priorityLevel == 3
+                                    ?  {borderLeft: '2px solid red'}
+                                    : task.priorityLevel == 2
+                                    ? {borderLeft: '2px solid orange'}
+                                    : {borderLeft: '2px solid green'}
+                                 }
+                            >
+                                <h5 className="task-container__info--title">{task.title}</h5>
+                                <p className="task-container__info--desc"> <b>Description:</b> {task.desc}</p>
+                                <p className="task-container__info--priority"><b>Priority:</b> {priorityLevelPrint(task.priorityLevel)}</p>
+                                <p className="task-container__info--date"><b>Date Limit:</b> {task.dateLimit && task.dateLimit.slice(0,10)}</p>
+                            </div>
+                            <div className="task-container__options">
+                                <button className="task-container__options--edit" onClick={() => edit(true, task)}><span className="material-symbols-outlined">edit_note</span></button>
+                                <button className="task-container__options--delete" onClick={() => deleteTask(Number(task.id))}><span className="material-symbols-outlined">delete</span></button>
+                            </div>
+                            </li>
+                )))
+                    : (<p >You dont have tasks already</p>)
+                }
+                {
+                    tasks.length > 3 
+                    && (<a className="tasks-sec__tasks-container--seAll" onClick={() => seeAllTask()}>{seeAll ? "SEE OLDEST" : "SEE ALL"}</a>)
+                }
+            </ul>
+            )}
+        
         <CreateModal
             show={showCreateModal}
             onClose={() => setShowCreateModal(false)}
             onSave={handleCreateTask}
             modalType={"task"}
         />
-         {isEditing ? (
-            <div>
-                <h4>Edit Task</h4>
-                <form onSubmit={handleSubmit(send)}>
-                    <label>
-                        Title:
-                    </label>
-                    <input
-                        type="text"
-                        {...register("Title")}
-                    />
-
-                    <label>
-                        Description:
-                    </label>
-                    <input
-                        type="text"
-                        {...register("Desc")}
-                    />
-
-                    <label>
-                        Priority:
-                    </label>
-                    <input
-                        type="number"
-                        {...register("PriorityLevel")}
-                    />
-
-                    <button type="submit" >Save</button>
-                    <button onClick={() => { edit(false, null)}}>Cancel</button>
-                </form>
-            </div>
-            ) : (
-            <ul>
-                {tasks 
-                    ? (tasksToMap.map(task => (
-                        <li key={task.id}>
-                            <h5>{task.title}</h5>
-                            <p> Description: {task.desc}</p>
-                            <p>Priority: {priorityLevelPrint(task.priorityLevel)}</p>
-                            <p>Date Limit: {task.dateLimit}</p>
-                            <button onClick={() => edit(true, task)}>Edit Task</button>
-                            <button onClick={() => deleteTask(Number(task.id))}>Delete Task</button>
-                        </li>
-                )))
-                    : (console.error("Tasks is null"))
-                }
-            </ul>
-            )}
     </section>
   )
 }

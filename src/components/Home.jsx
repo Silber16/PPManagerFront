@@ -2,6 +2,9 @@ import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import Projects from "./Projects"
 import axios from "axios"
+import AppDesc from './AppDesc'
+import Register from "./Register"
+
 
 export default function Home() {
 
@@ -12,44 +15,45 @@ export default function Home() {
             .then(res => {
                 setIsLoggedIn(res.data.isAuthenticated)
             })
-            .catch(setIsLoggedIn(false))
+            .catch(() => {
+                setIsLoggedIn(false)
+                
+            })
     }, [])
     
   return (
-   <section>
+    <>
+        <section className="home-sec">
        {isLoggedIn ? 
        (
             <>
-                <header>
-                    <h1>PPManager</h1>
-                    <Link>User</Link>
+                <header className="home-sec__header">
+                    <h1 className="home-sec__header--title"><a href="#">ProjectPilot</a></h1>
+                    <Link to={'/UserData'} className="home-sec__header--user" ><span className="material-symbols-outlined">account_circle</span></Link>
                 </header>
-                <nav>
-                    <Link>+INFO</Link>
-                    <Link>CONTACT & SM</Link>
-                </nav>
-                <label >PROJECTS</label>
                 <Projects />
-                <Link to={"/Project/Create"} >Create a new project</Link>
             </>
        ) 
        : 
        (
             <>
-              <header>
-                <h1>PPManager</h1>
+                <header className="home-sec__header">
+                    <h1 className="home-sec__header--title"><a href="#">ProjectPilot</a></h1>
                 </header>
-                <nav>
-                    <Link>+INFO</Link>
-                    <Link>CONTACT & SM</Link>
-                </nav>
-                <div>
-                    <p>Manage your projects in the simplest way</p>
-                    <Link to={'/Register'}>Register/Login</Link>
+                <div className="home-sec__landing">
+                    <p className="home-sec__landing--phrase">
+                        Manage your projects <br /> in the simplest way. 
+                        <br /><span style={{color: 'var(--o-color)', fontWeight: '600'}}>100% free.</span>
+                    </p>
+                    <Link to={'/Register'} className="home-sec__landing--registerBtn">Register/Login</Link>
+                    <Register className="home-sec__landing--registerComp" />
                 </div>
+                <span style={{position: 'absolute', bottom: '1rem', fontSize: '2.5rem', color: 'var(--b-color)'}} className="material-symbols-outlined">keyboard_arrow_down</span>
             </>
        )
        }
-   </section>
+       </section>
+       {isLoggedIn == false && <AppDesc />}
+    </>
   )
 }

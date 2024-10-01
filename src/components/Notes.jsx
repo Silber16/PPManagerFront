@@ -2,23 +2,26 @@ import axios from "axios";
 import { useState } from "react";
 import CreateModal from "./CreateModal";
 import { useForm } from "react-hook-form";
+import Hamburger from 'hamburger-react'
 
 export default function Notes({projectNotes, projectId}) {
   
   const {register, handleSubmit, setValue} = useForm();
 
   const [notes, setNotes] = useState(projectNotes);
+  const [showNotes, setShowNotes] = useState()
   const [showModal, setShowModal] = useState(false);
-  
+  const [isOpen, setOpen] = useState(false)
   const [editingNote, setEditingNote] = useState();
   const [isEditing, setIsEditing] = useState(false);
 
   async function handleCreateNote(note) {
     note = {
         ...note,
-        projectId: projectId
+        projectId: projectId,
+        link: [note.link]
     };
-    
+    console.log(note.resources)
     axios.post("https://localhost:7158/Note/Create", note)
         .then(res => {
             if (res.status == 200 || res.status == 201) {
@@ -72,67 +75,84 @@ export default function Notes({projectNotes, projectId}) {
           )
       }
 }
-
   return (
-     <section>
-        <h4>Notes</h4>
-        <button onClick={() => setShowModal(true)}>Create Note</button>
+     <section className="notes-sec">
+        <div className="notes-sec__header">
+            <label>Notes</label>
+            <Hamburger className="notes-sec__hamburguer" toggled={isOpen} toggle={setOpen}  onToggle={() => setShowNotes(!showNotes)}/>
+        </div>
+        {isEditing ? (
+                     <>
+                        <label className="edit-note-label">Edit Task</label>
+                        <div className="edit-note">
+                            <form className="edit-noet__form" onSubmit={handleSubmit(send)}>
+                                <div className="edit-note__form--inps">
+                                    <div>
+                                        <label>
+                                            Title:
+                                        </label>
+                                        <input
+                                            type="text"
+                                            {...register("Title")}
+                                        />
+                                    </div>
+                                    <div>
+                                        <label>
+                                            Description:
+                                        </label>
+                                        <input
+                                            type="text"
+                                            {...register("Desc")}
+                                        />
+                                    </div>
+                                    <div>
+                                        <label>
+                                            Resources:
+                                        </label>
+                                        <input
+                                            type="url"
+                                            {...register("Link")}
+                                        />
+                                    </div>
+                                </div>
+                                <div className="edit-note__form--btns">
+                                    <button type="submit" >
+                                        <span className="material-symbols-outlined">check</span>
+                                    </button>
+                                    <button onClick={() => { edit(false, null)}}>
+                                        <span className="material-symbols-outlined">close</span>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                     </>
+                     ) 
+                   : (
+                    <ul className={showNotes ? "notes-sec__notes-container" : "hidden"}>
+                      {notes.length > 0
+                          ? (notes.map(
+                            note => (
+                                <li className="note-container" key={note.id}>
+                                    <h5 className="note-container__title">{note.title}</h5>
+                                    <p className="note-container__desc"><b>Description:</b>{note.desc}</p>
+                                    {note.link && <p className="note-container__links"><b>Resources:</b>{note.link}</p>}
+                                    <div className="note-container__options">
+                                        <button className="note-container__options--edit" onClick={() => edit(true, note)}><span className="material-symbols-outlined">edit_note</span></button>
+                                        <button className="note-container__options--delete" onClick={() => DeleteNote(Number(note.id))}><span className="material-symbols-outlined">delete</span></button>
+                                    </div>
+                                </li>
+                        )))
+                          : (<p>You dont have notes already</p>)
+                      }
+                    </ul>
+                    )}        
+        <button className="notes-sec__createNote" onClick={() => setShowModal(true)}>Create Note</button>
         <CreateModal
             show={showModal}
             onClose={() => setShowModal(false)}
             onSave={handleCreateNote}
             modalType={"note"}
         />
-        <ul>
-                {isEditing ? (
-                  <div>
-                      <h4>Edit Task</h4>
-                      <form onSubmit={handleSubmit(send)}>
-                          <label>
-                              Title:
-                          </label>
-                          <input
-                              type="text"
-                              {...register("Title")}
-                          />
-      
-                          <label>
-                              Description:
-                          </label>
-                          <input
-                              type="text"
-                              {...register("Desc")}
-                          />
-      
-                          <label>
-                              Resources:
-                          </label>
-                          <input
-                              type="url"
-                              {...register("Link")}
-                          />
-      
-                          <button type="submit">Save</button>
-                          <button onClick={() => { edit(false, null)}}>Cancel</button>
-                      </form>
-                  </div>
-                  ) : (
-                  <ul>
-                      {notes 
-                          ? (notes.map(
-                            note => (
-                                <li key={note.id}>
-                                    <h5>{note.title}</h5>
-                                    <p>{note.desc}</p>
-                                    <button onClick={() => edit(true, note)}>Edit note</button>
-                                    <button onClick={() => DeleteNote(Number(note.id))}>Delete Note</button>
-                                </li>
-                        )))
-                          : (console.error("notes is null"))
-                      }
-                  </ul>
-                  )}
-        </ul>
     </section>
   )
 }

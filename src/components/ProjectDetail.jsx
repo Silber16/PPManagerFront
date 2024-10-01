@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { useParams} from 'react-router-dom';
+import { Link, useParams} from 'react-router-dom';
 import Tasks from './Tasks';
 import Notes from './Notes';
 
@@ -26,11 +26,12 @@ export default function ProjectDetail() {
     
   return (
     <>
+      <Link to={'/'} className='arrow-back'><span className="material-symbols-outlined">arrow_back</span></Link>
       {project 
       ? (
-        <section>
-          <header>
-            <h3>{project.title}</h3>
+        <section className='projectDetail-sec'>
+          <header className='projectDetail-sec__header'>
+            <h3 className='projectDetail-sec__header--title'>{project.title}</h3>
           </header>
           <Tasks 
             projectTasks={project.tasks}
@@ -43,7 +44,7 @@ export default function ProjectDetail() {
         </section>
       )
       : (
-        console.log(project)
+        console.log("wait")
       )
       }
     </>
