@@ -3,12 +3,15 @@ import { useEffect, useState } from 'react';
 import { Link, useParams} from 'react-router-dom';
 import Tasks from './Tasks';
 import Notes from './Notes';
+import Timer from './Timer';
+import WeekTimeUse from './WeekTimeUse';
 
 
 export default function ProjectDetail() {
 
     const [project, setProject] = useState()
     const {id} = useParams()
+
     useEffect(() => {
 
         axios.get(`https://localhost:7158/Project/Detail/${id}`, {withCredentials:true})
@@ -41,6 +44,10 @@ export default function ProjectDetail() {
             projectNotes={project.notes}
             projectId={Number(id)}
           />
+          <div className='projectDetail-sec__timer'>
+            <Timer  />
+            <WeekTimeUse />
+          </div>
         </section>
       )
       : (
