@@ -51,7 +51,7 @@ export default function Tasks({projectTasks, projectId}) {
             projectId: projectId
         };
         
-        axios.post("https://localhost:7158/Tasks/Create", task)
+        axios.post(`${import.meta.env.VITE_BACK_URI}/Tasks/Create`, task)
             .then(res => {
                 if (res.status == 200 || res.status == 201) {
                     setTasks([...tasks, task])
@@ -62,7 +62,7 @@ export default function Tasks({projectTasks, projectId}) {
     }
 
     async function send(data) {
-        await axios.patch(`https://localhost:7158/Tasks/Edit/${editingTask.id}`, data) 
+        await axios.patch(`${import.meta.env.VITE_BACK_URI}/Tasks/Edit/${editingTask.id}`, data) 
         .then(response => {
             if (response.status == 200) {
                 setIsEditing(false)
@@ -74,7 +74,7 @@ export default function Tasks({projectTasks, projectId}) {
 
     async function deleteTask(taskId) {
         if (taskId != undefined) {
-            axios.delete(`https://localhost:7158/Tasks/Delete/${taskId}`)
+            axios.delete(`${import.meta.env.VITE_BACK_URI}/Tasks/Delete/${taskId}`)
               .then(response => {
 
                 console.log(response.status)

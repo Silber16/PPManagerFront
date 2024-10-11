@@ -46,13 +46,13 @@ export default function Timer() {
 
   const sendTimeToBackend = async (duration, start, end) => {
     try {
-      await axios.post('https://localhost:7158/Timer/SetTime', {
+      await axios.post(`${import.meta.env.VITE_BACK_URI}/Timer/SetTime`, {
         Duration: duration,         
         Start: start,               
         End: end                  
       }, {withCredentials:true});
     } catch (error) {
-      console.error('Error enviando tiempo al backend', error);
+      console.error('sendTime error', error);
     }
   };
 

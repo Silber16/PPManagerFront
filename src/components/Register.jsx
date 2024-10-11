@@ -9,7 +9,7 @@ export default function Register({className}) {
 
    async function Send(data) {
     console.log(data)
-        await axios.post(`https://localhost:7158/Account/Register`, data) 
+        await axios.post(`${import.meta.env.VITE_BACK_URI}/Account/Register`, data) 
         console.log("register ok")
   }
 

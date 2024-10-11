@@ -8,11 +8,11 @@ export default function Login() {
   const {register, handleSubmit} = useForm();
 
    async function Send(data) {
-        await axios.post(`https://localhost:7158/Account/Login`, data, {withCredentials: true}) 
+        await axios.post(`${import.meta.env.VITE_BACK_URI}/Account/Login`, data, {withCredentials: true}) 
         .then(() => {
             window.location.href = "/";
         })
-        .catch(e => console.error("login errror: ", e) )
+        .catch(e => console.error("login error: ", e) )
       }
 
   return (

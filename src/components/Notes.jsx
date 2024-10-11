@@ -22,7 +22,7 @@ export default function Notes({projectNotes, projectId}) {
         link: [note.link]
     };
     console.log(note.resources)
-    axios.post("https://localhost:7158/Note/Create", note)
+    axios.post(`${import.meta.env.VITE_BACK_URI}/Note/Create`, note)
         .then(res => {
             if (res.status == 200 || res.status == 201) {
                 setNotes([...notes, note])
@@ -49,7 +49,7 @@ export default function Notes({projectNotes, projectId}) {
       setValue("Link", task.PriorityLevel);
   }
   async function send(data) {
-    await axios.patch(`https://localhost:7158/Note/Edit/${editingNote.id}`, data) 
+    await axios.patch(`${import.meta.env.VITE_BACK_URI}/Note/Edit/${editingNote.id}`, data) 
     .then(response => {
         if (response.status == 200) {
            setIsEditing(false)
@@ -61,7 +61,7 @@ export default function Notes({projectNotes, projectId}) {
 
   async function DeleteNote(noteId) {
     if (noteId != undefined) {
-        axios.delete(`https://localhost:7158/Note/Delete/${noteId}`)
+        axios.delete(`${import.meta.env.VITE_BACK_URI}/Note/Delete/${noteId}`)
           .then(response => {
 
             console.log(response.status)

@@ -7,7 +7,7 @@ export default function UserManager() {
     const [userData, setUserData] = useState()
 
     useEffect(() => {
-      axios.get('https://localhost:7158/Account/GetUserInfo', {withCredentials:true})
+      axios.get(`${import.meta.env.VITE_BACK_URI}/GetUserInfo`, {withCredentials:true})
         .then(res => {
             if (res != null) {
                 setUserData(res.data)
@@ -18,12 +18,12 @@ export default function UserManager() {
     }, [])
     
     async function LogOut() {
-        axios.post('https://localhost:7158/Account/LogOut', null, {withCredentials:true})
+        axios.post(`${import.meta.env.VITE_BACK_URI}/Account/LogOut`, null, {withCredentials:true})
           .then(res => {
               res.status == 200 && console.log("logged out")
               window.location.href = "/";
             })
-          .catch(e => console.error("log out error: ", e))
+          .catch(e => console.error("logout error: ", e))
     }
 
   return (

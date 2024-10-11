@@ -11,7 +11,7 @@ export default function Home() {
     const [isLoggedIn, setIsLoggedIn] = useState(false)
     
     useEffect(() => {
-        axios.get('https://localhost:7158/Account/CheckAuth', {withCredentials:true})
+        axios.get(`${import.meta.env.VITE_BACK_URI}/Account/CheckAuth`, {withCredentials:true})
             .then(res => {
                 setIsLoggedIn(res.data.isAuthenticated)
             })

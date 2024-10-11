@@ -10,7 +10,7 @@ export default function Projects() {
 
     useEffect(() => {
        
-        axios.get(`https://localhost:7158/Project`, { withCredentials: true })
+        axios.get(`${import.meta.env.VITE_BACK_URI}/Project`, { withCredentials: true })
         .then(res => {
             if (res.data.length <= 0) {
                 return "empty"
@@ -24,7 +24,7 @@ export default function Projects() {
     
     async function Send(data) {
     
-        await axios.post(`https://localhost:7158/Project/Create`, data,{ withCredentials: true }) 
+        await axios.post(`${import.meta.env.VITE_BACK_URI}/Project/Create`, data,{ withCredentials: true }) 
           .then(() => window.location.reload())
           .catch(e => console.error(e))
         return
@@ -33,7 +33,7 @@ export default function Projects() {
     async function DeleteProject(projectId) {
 
         if (projectId != undefined) {
-            axios.delete(`https://localhost:7158/Project/Delete/${projectId}`, {withCredentials:true})
+            axios.delete(`${import.meta.env.VITE_BACK_URI}/Project/Delete/${projectId}`, {withCredentials:true})
               .then(response => {
 
                 console.log(response.status)

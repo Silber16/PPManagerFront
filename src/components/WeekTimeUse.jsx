@@ -9,10 +9,10 @@ export default function WeekTimeUse() {
   useEffect(() => {
     const fetchWeeklyData = async () => {
       try {
-        const response = await axios.get('https://localhost:7158/Timer/WeekTimerUse', {withCredentials:true});
+        const response = await axios.get(`${import.meta.env.VITE_BACK_URI}/Timer/WeekTimerUse`, {withCredentials:true});
         setWeeklyData(response.data);
       } catch (error) {
-        console.error('Error obteniendo los datos semanales', error);
+        console.error('get weekly data error', error);
       }
 
     };
