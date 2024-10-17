@@ -9,6 +9,7 @@ export default function Register({className}) {
   const {register, handleSubmit, formState: {errors}} = useForm();
   const [loading, setLoading] = useState(false);
 
+  console.log(errors)
    async function Send(data) {
         setLoading(true)
         try {
@@ -36,7 +37,8 @@ export default function Register({className}) {
                             message: "Email is required."
                         } 
                         })}/>
-                    <input placeholder='Password' type="password" name="" id="" {...register("Password", { 
+                    {errors.Email && <span className='error-message'>{errors.Email.message}</span>}
+                    <input  placeholder='Password' type="password" name="" id="" {...register("Password", { 
                         required: {
                             value: true,
                             message: "Password is required."
@@ -50,7 +52,7 @@ export default function Register({className}) {
                             message: "Password must contain at least one uppercase letter, one number, and one special character"
                           }
                     })}/>
-                    {errors.Password && <span>{errors.Password.message}</span>}
+                    {errors.Password && <span className='error-message'>{errors.Password.message}</span>}
                     <input placeholder='Confirm password' type="password" name="" id="" {...register("ConfirmPassword", {
                         required: {
                             value: true,
@@ -65,7 +67,7 @@ export default function Register({className}) {
                             message: "Password must contain at least one uppercase letter, one number, and one special character"
                           }
                     })}/>
-                    {errors.ConfirmPassword && <span>{errors.ConfirmPassword.message}</span>}
+                    {errors.ConfirmPassword && <span className='error-message'>{errors.ConfirmPassword.message}</span>}
                 </div>
                 {loading 
                     ? (<p>Loading...</p>)

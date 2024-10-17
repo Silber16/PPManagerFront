@@ -67,7 +67,7 @@ export default function Projects() {
                   key={index}
                   DeleteProject={DeleteProject}
                 />
-            ))) : (<p>You dont have projects already</p>)} 
+            ))) : (<p>You have no projects yet</p>)} 
          </div>
          <button onClick={() => setShowCreateModal(true)} className="projects-sec__createProject">Create Project</button>
                 <CreateModal

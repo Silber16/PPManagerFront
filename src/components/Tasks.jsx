@@ -190,7 +190,7 @@ export default function Tasks({projectTasks, projectId}) {
                             </div>
                             </li>
                 )))
-                    : (<p >You dont have tasks already</p>)
+                    : (<p >You have no tasks yet.</p>)
                 }
                 {
                     tasks.length > 3 

@@ -140,7 +140,7 @@ export default function Notes({projectNotes, projectId}) {
                                     </div>
                                 </li>
                         )))
-                          : (<p>You dont have notes already</p>)
+                          : (<p>You have no notes yet.</p>)
                       }
                     </ul>
                     )}        

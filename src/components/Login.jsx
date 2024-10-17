@@ -8,15 +8,17 @@ export default function Login() {
 
   const {register, handleSubmit} = useForm();
   const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   async function Send(data) {
     setLoading(true); 
+    setErrorMessage('');
     try {
       await axios.post(`${import.meta.env.VITE_BACK_URI}/Account/Login`, data, { withCredentials: true });
       window.location.href = "/"; 
     } catch (e) {
-      if (e.response && e.response.status === 401) {
-          console.error("Incorrect email or password");
+      if (e.response && e.response.status === 401 || e.response.status === 400) {
+          setErrorMessage('Incorrect email or password');
         } else {
           console.error("login error: ", e);
         }
@@ -39,6 +41,7 @@ export default function Login() {
                         <label style={{margin: '0 .3rem', fontSize: '1.1rem'}} htmlFor="">Remember me</label>
                         <input style={{margin: '0 .3rem', padding:'.5rem'}} type="checkbox" name="RememberMe" {...register("RememberMe")}/>
                     </div>
+                    {errorMessage && <span style={{ color: 'red' }}>{errorMessage}</span>}
                 </div>
                 {loading 
                     ? (<p>Loading...</p>)
