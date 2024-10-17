@@ -1,19 +1,25 @@
 
 import axios from 'axios'
+import { useState } from 'react';
 import {useForm} from 'react-hook-form'
 import {Link} from 'react-router-dom'
 
 export default function Login() {
 
   const {register, handleSubmit} = useForm();
+  const [loading, setLoading] = useState(false);
 
-   async function Send(data) {
-        await axios.post(`${import.meta.env.VITE_BACK_URI}/Account/Login`, data, {withCredentials: true}) 
-        .then(() => {
-            window.location.href = "/";
-        })
-        .catch(e => console.error("login error: ", e) )
-      }
+  async function Send(data) {
+    setLoading(true); 
+    try {
+      await axios.post(`${import.meta.env.VITE_BACK_URI}/Account/Login`, data, { withCredentials: true });
+      window.location.href = "/"; 
+    } catch (e) {
+      console.error("login error: ", e);
+    } finally {
+      setLoading(false); 
+    }
+  }
 
   return (
         <section className='login-register-sec'>
@@ -30,7 +36,10 @@ export default function Login() {
                         <input style={{margin: '0 .3rem', padding:'.5rem'}} type="checkbox" name="RememberMe" {...register("RememberMe")}/>
                     </div>
                 </div>
-                <button className='login-register-sec__form--submit' type="submit">Login</button>
+                {loading 
+                    ? (<p>Loadign...</p>)
+                    : ( <button className='login-register-sec__form--submit' type="submit">Login</button>)
+                }
             </form>
             <p>You are not registered? <Link to={`/Register`}>Register</Link></p>
         </section>  
