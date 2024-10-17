@@ -17,7 +17,7 @@ export default function UserManager() {
         .catch(e => console.error("error at GET req. ", e))
     }, [])
     
-    async function LogOut() {
+    function LogOut() {
         axios.post(`${import.meta.env.VITE_BACK_URI}/Account/LogOut`, null, {withCredentials:true})
           .then(res => {
               res.status == 200 && console.log("logged out")

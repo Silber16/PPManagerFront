@@ -10,6 +10,7 @@ export default function WeekTimeUse() {
     const fetchWeeklyData = async () => {
       try {
         const response = await axios.get(`${import.meta.env.VITE_BACK_URI}/Timer/WeekTimerUse`, {withCredentials:true});
+        console.log(response.data)
         setWeeklyData(response.data);
       } catch (error) {
         console.error('get weekly data error', error);
@@ -24,7 +25,7 @@ export default function WeekTimeUse() {
     <div className='weekUssage-container'>
       <label className='weekUssage-container__lbl'>time spent this week:</label>
       <ul className='weekUssage-container__sub-container'>
-        {weeklyData ? (weeklyData.map((day, index) => (
+        {weeklyData.length > 0 ? (weeklyData.map((day, index) => (
           <li className='weekUssage-container__sub-container--day' key={index}>
               <label>{new Date(day.day).toLocaleDateString()}</label>
               <strong>

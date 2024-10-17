@@ -15,7 +15,11 @@ export default function Login() {
       await axios.post(`${import.meta.env.VITE_BACK_URI}/Account/Login`, data, { withCredentials: true });
       window.location.href = "/"; 
     } catch (e) {
-      console.error("login error: ", e);
+      if (e.response && e.response.status === 401) {
+          console.error("Incorrect email or password");
+        } else {
+          console.error("login error: ", e);
+        }
     } finally {
       setLoading(false); 
     }
@@ -37,7 +41,7 @@ export default function Login() {
                     </div>
                 </div>
                 {loading 
-                    ? (<p>Loadign...</p>)
+                    ? (<p>Loading...</p>)
                     : ( <button className='login-register-sec__form--submit' type="submit">Login</button>)
                 }
             </form>
