@@ -13,7 +13,7 @@ export default function Register({className}) {
    async function Send(data) {
         setLoading(true)
         try {
-            await axios.post(`${import.meta.env.VITE_BACK_URI}/Account/Register`, data) 
+            await axios.post(`${import.meta.env.VITE_BACK_URI}/Account/Register`, data, {withCredentials:true}) 
             window.location.href = "/Login"; 
         } catch (e) {
             console.error("register error ", e);
@@ -31,14 +31,14 @@ export default function Register({className}) {
             <label className='login-register-sec__lbl'>Register</label>
             <form className='login-register-sec__form' onSubmit={handleSubmit(Send)}>
                 <div className='login-register-sec__form--inpts'>
-                    <input placeholder='Email' type="email" name="" id="" {...register("Email", {
+                    <input placeholder='Email' type="email" {...register("Email", {
                         required: {
                             value: true,
                             message: "Email is required."
                         } 
                         })}/>
                     {errors.Email && <span className='error-message'>{errors.Email.message}</span>}
-                    <input  placeholder='Password' type="password" name="" id="" {...register("Password", { 
+                    <input  placeholder='Password' type="password" {...register("Password", { 
                         required: {
                             value: true,
                             message: "Password is required."
@@ -53,7 +53,7 @@ export default function Register({className}) {
                           }
                     })}/>
                     {errors.Password && <span className='error-message'>{errors.Password.message}</span>}
-                    <input placeholder='Confirm password' type="password" name="" id="" {...register("ConfirmPassword", {
+                    <input placeholder='Confirm password' type="password" {...register("ConfirmPassword", {
                         required: {
                             value: true,
                             message: "Password is required."
