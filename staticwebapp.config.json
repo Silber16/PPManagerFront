@@ -3,7 +3,12 @@
     {
       "route": "/api/*",
       "allowedRoles": ["anonymous"],
-      "rewrite": "https://projectpilot.azurewebsites.net/api/"
+      "rewrite": "https://projectpilot.azurewebsites.net/api"
+    },
+    {
+      "route": "/*",
+      "allowedRoles": ["anonymous"],
+      "rewrite": "/index.html"
     }
   ]
 }
