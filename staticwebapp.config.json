@@ -3,7 +3,7 @@
     {
       "route": "/api/*",
       "allowedRoles": ["anonymous"],
-      "rewrite": "https://mi-backend.azurewebsites.net/api/"
+      "rewrite": "https://projectpilot.azurewebsites.net/api/"
     }
   ]
 }
