@@ -1,7 +1,7 @@
 {
   "routes": [
     {
-      "route": "/api/*",
+      "route": "https://proud-glacier-09882b50f.5.azurestaticapps.net/api/*",
       "methods": [
         "get",
         "post",
@@ -9,6 +9,7 @@
         "patch",
         "put"
       ],
+      "rewrite": "https://projectpilot.azurewebsites.net/api",
       "redirect": "https://projectpilot.azurewebsites.net/api",
       "allowedRoles": [
         "anonymous"
