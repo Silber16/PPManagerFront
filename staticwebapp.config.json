@@ -5,13 +5,9 @@
       "methods": [
         "get",
         "post",
-        "put",
         "delete",
         "patch",
-        "head",
-        "connect",
-        "trace",
-        "options"
+        "put"
       ],
       "rewrite": "https://projectpilot.azurewebsites.net/api",
       "redirect": "https://projectpilot.azurewebsites.net/api",
