@@ -9,7 +9,7 @@
         "delete",
         "patch"
       ],
-      "rewrite": "https://projectpilot.azurewebsites.net/api/",
+      "rewrite": "https://projectpilot.azurewebsites.net/api",
       "redirect": "https://projectpilot.azurewebsites.net/api",
       "allowedRoles": [
         "anonymous"
