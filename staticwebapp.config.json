@@ -7,11 +7,14 @@
         "post",
         "put",
         "delete",
-        "patch"
+        "patch",
+        "head",
+        "connect",
+        "trace",
+        "options"
       ],
       "rewrite": "https://projectpilot.azurewebsites.net/api",
       "redirect": "https://projectpilot.azurewebsites.net/api",
-      "statusCode": 302,
       "allowedRoles": [
         "anonymous"
       ]
