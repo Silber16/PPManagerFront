@@ -23,7 +23,7 @@ export default function Notes({projectNotes, projectId}) {
     };
 
     try {
-        await axios.post(`${import.meta.env.VITE_BACK_URI}/Note/Create`, note)
+        await axios.post(`$api/Note/Create`, note)
         setNotes([...notes, note])
         window.location.reload();
     } catch (e) {
@@ -48,7 +48,7 @@ export default function Notes({projectNotes, projectId}) {
   async function send(data) {
 
     try {
-        await axios.patch(`${import.meta.env.VITE_BACK_URI}/Note/Edit/${editingNote.id}`, data) 
+        await axios.patch(`api/Note/Edit/${editingNote.id}`, data) 
         setIsEditing(false)
         window.location.reload();
     } catch (e) {
@@ -59,7 +59,7 @@ export default function Notes({projectNotes, projectId}) {
 
   function DeleteNote(noteId) {
     if (noteId != undefined) {
-        axios.delete(`${import.meta.env.VITE_BACK_URI}/Note/Delete/${noteId}`)
+        axios.delete(`api/Note/Delete/${noteId}`)
           .then(response => {
 
             console.log(response.status)

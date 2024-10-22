@@ -46,7 +46,7 @@ export default function Timer() {
 
   const sendTimeToBackend = async (duration, start, end) => {
     try {
-      await axios.post(`${import.meta.env.VITE_BACK_URI}/Timer/SetTime`, {
+      await axios.post(`api/Timer/SetTime`, {
         Duration: duration,         
         Start: start,               
         End: end                  

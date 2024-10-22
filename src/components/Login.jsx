@@ -14,8 +14,8 @@ export default function Login() {
     setLoading(true); 
     setErrorMessage('');
     try {
-      await axios.post(`${import.meta.env.VITE_BACK_URI}/Account/Login`, data, { withCredentials: true });
-      window.location.href = "/"; 
+      await axios.post(`api/Account/Login`, data, { withCredentials: true });
+      
     } catch (e) {
       if (e.response && e.response.status === 401 || e.response.status === 400) {
           setErrorMessage('Incorrect email or password');

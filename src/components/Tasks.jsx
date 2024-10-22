@@ -52,7 +52,7 @@ export default function Tasks({projectTasks, projectId}) {
         };
         
         try {
-            await axios.post(`${import.meta.env.VITE_BACK_URI}/Tasks/Create`, task)
+            await axios.post(`api/Tasks/Create`, task)
             setTasks([...tasks, task])
             window.location.reload();
         } catch (e) {
@@ -64,7 +64,7 @@ export default function Tasks({projectTasks, projectId}) {
     async function send(data) {
 
         try {
-            await axios.patch(`${import.meta.env.VITE_BACK_URI}/Tasks/Edit/${editingTask.id}`, data) 
+            await axios.patch(`api/Tasks/Edit/${editingTask.id}`, data) 
             setIsEditing(false)
             window.location.reload()
         } catch (e) {
@@ -74,7 +74,7 @@ export default function Tasks({projectTasks, projectId}) {
 
     function deleteTask(taskId) {
         if (taskId != undefined) {
-            axios.delete(`${import.meta.env.VITE_BACK_URI}/Tasks/Delete/${taskId}`)
+            axios.delete(`api/Tasks/Delete/${taskId}`)
               .then(response => {
 
                 console.log(response.status)
