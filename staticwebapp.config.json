@@ -1,10 +1,18 @@
 {
-    "routes": [
-      {
-        "route": "/api/*",
-        "allowedRoles": ["anonymous"],
-        "rewrite": "https://projectpilot.azurewebsites.net/api/"
-      }
-    ]
-  }
-
+  "routes": [
+    {
+      "route": "/api/*",
+      "methods": [
+        "get",
+        "post",
+        "put",
+        "delete",
+        "patch"
+      ],
+      "rewrite": "https://projectpilot.azurewebsites.net/api/",
+      "allowedRoles": [
+        "anonymous"
+      ]
+    }
+  ]
+}
