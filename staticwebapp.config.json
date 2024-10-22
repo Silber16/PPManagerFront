@@ -11,6 +11,7 @@
       ],
       "rewrite": "https://projectpilot.azurewebsites.net/api",
       "redirect": "https://projectpilot.azurewebsites.net/api",
+      "statusCode": 302,
       "allowedRoles": [
         "anonymous"
       ]
