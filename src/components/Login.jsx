@@ -14,7 +14,7 @@ export default function Login() {
     setLoading(true); 
     setErrorMessage('');
     try {
-      await axios.post(`api/Account/Login`, data, { withCredentials: true });
+      await axios.post(`${import.meta.env.VITE_BACK_URI}/api/Account/Login`, data, { withCredentials: true });
       
     } catch (e) {
       if (e.response && e.response.status === 401 || e.response.status === 400) {

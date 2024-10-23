@@ -6,7 +6,7 @@ export default function EditProjectModal({show, onClose, id}) {
     const {register, handleSubmit} = useForm();
 
     function Send(data) {
-        axios.patch(`api/Project/Edit/${id}`, data, {withCredentials:true}) 
+        axios.patch(`${import.meta.env.VITE_BACK_URI}/api/Project/Edit/${id}`, data, {withCredentials:true}) 
             .then(response => {
                 if (response.status == 200) {
                     window.location.reload();

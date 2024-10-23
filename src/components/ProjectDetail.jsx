@@ -14,7 +14,7 @@ export default function ProjectDetail() {
 
     useEffect(() => {
 
-        axios.get(`api/Project/Detail/${id}`, {withCredentials:true})
+        axios.get(`${import.meta.env.VITE_BACK_URI}/api/Project/Detail/${id}`, {withCredentials:true})
         .then(res => {
           
             if (res.data != null) {

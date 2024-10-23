@@ -13,7 +13,7 @@ export default function Register({className}) {
    async function Send(data) {
         setLoading(true)
         try {
-            await axios.post(`api/Account/Register`, data, {withCredentials:true}) 
+            await axios.post(`${import.meta.env.VITE_BACK_URI}/api/Account/Register`, data, {withCredentials:true}) 
             window.location.href = "/Login"; 
         } catch (e) {
             console.error("register error ", e);

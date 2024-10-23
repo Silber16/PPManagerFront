@@ -8,7 +8,7 @@ export default function WeekTimeUse() {
 
   useEffect(() => {
 
-        axios.get(`api/Timer/WeekTimerUse`, {withCredentials:true})
+        axios.get(`${import.meta.env.VITE_BACK_URI}/api/Timer/WeekTimerUse`, {withCredentials:true})
           .then(response =>
             setWeeklyData(response.data)
           )
