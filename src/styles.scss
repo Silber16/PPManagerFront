@@ -349,6 +349,15 @@ body {
                     display: flex;
                     gap: 1rem;
                 }
+                &--refresh {
+                    background-color: transparent;
+                    border: none;
+                    span {
+                        overflow: hidden;
+                        color: var(--b-color);
+                        font-size: 1.1rem;
+                    }
+                }
             }
         }
     }

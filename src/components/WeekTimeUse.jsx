@@ -17,9 +17,6 @@ export default function WeekTimeUse() {
     }
   , []);
 
-  console.log(weeklyData)
-
-
   return (
     <div className='weekUssage-container'>
       <label className='weekUssage-container__lbl'>time spent this week:</label>
@@ -37,7 +34,9 @@ export default function WeekTimeUse() {
           <p style={{textAlign:'center'}}>You have not worked any time yet</p>
         )
         }
-        <button onClick={() => window.location.reload()}>reload</button>
+      <button onClick={() => window.location.reload()} className='weekUssage-container__sub-container--refresh'>
+          <span className="material-symbols-outlined">refresh</span>
+      </button>
       </ul>
     </div>
   );
