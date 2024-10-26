@@ -26,9 +26,11 @@ body {
     left: 2.5%;
     width: 95%;
     margin: 0;
-    padding: .7rem;
+    padding: .8rem;
     transform: translateX(0);
     transition: all .5s ease-out;
+    font-size: 1rem;
+    text-align: left;
     &__closeBtn {
         background-color: var(--b-color);
         color: var(--w-color);

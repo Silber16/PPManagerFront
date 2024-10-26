@@ -26,7 +26,7 @@ export default function WeekTimeUse() {
           <li className='weekUssage-container__sub-container--day' key={index}>
               <label>{new Date(day.day).toLocaleDateString()}</label>
               <strong>
-                {ToMinutesHours(day.totalDuration).hours}h 
+                {ToMinutesHours(day.totalDuration).hours}h-
                 {ToMinutesHours(day.totalDuration).minutes}mins
               </strong>
           </li>
