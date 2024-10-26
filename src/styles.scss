@@ -15,6 +15,30 @@ body {
     --o-color: #ec6d4e;
   }
 
+.accessMessage-container {
+    margin: 1rem;
+    border-radius: 12px;
+    background-color: var(--o-color);
+    box-shadow: 1px 1px 14px rgba(82, 82, 82, 0.281);
+    position: absolute;
+    z-index: 1000;
+    top: .6rem;
+    left: 2.5%;
+    width: 95%;
+    margin: 0;
+    padding: .7rem;
+    transform: translateX(0);
+    transition: all .5s ease-out;
+    &__closeBtn {
+        background-color: var(--b-color);
+        color: var(--w-color);
+        border: none;
+        border-radius: 10px;
+        padding: .2rem .4rem;
+        margin-top: .3rem;
+        font-size: .8rem;
+    }
+}
 
 .login-register-sec {
     min-height: 100vh;
@@ -754,6 +778,10 @@ span {
     }
 }
 @media screen and (min-width: 768px) {
+    .accessMessage-container {
+        width: 98%;
+        left: 1%;
+    }
     .home-sec {
         &__header {
             width: 98%;
@@ -877,9 +905,7 @@ span {
         }
     }
     .projectDetail-sec {
-        .tasks-sec {
-          
-        }
+      
         .notes-sec {
            
             &__header {

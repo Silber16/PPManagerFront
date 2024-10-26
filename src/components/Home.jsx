@@ -4,6 +4,7 @@ import Projects from "./Projects"
 import axios from "axios"
 import AppDesc from './AppDesc'
 import Register from "./Register"
+import AccessMessage from "./AccessMessage"
 
 
 export default function Home() {
@@ -23,7 +24,8 @@ export default function Home() {
     
   return (
     <>
-        <section className="home-sec">
+       <AccessMessage /> 
+       <section className="home-sec">
        {isLoggedIn ? 
        (
             <>
