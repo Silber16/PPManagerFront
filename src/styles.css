@@ -17,6 +17,33 @@ body {
   --o-color: #ec6d4e;
 }
 
+.accessMessage-container {
+  margin: 1rem;
+  border-radius: 12px;
+  background-color: var(--o-color);
+  box-shadow: 1px 1px 14px rgba(82, 82, 82, 0.281);
+  position: absolute;
+  z-index: 1000;
+  top: 0.6rem;
+  left: 2.5%;
+  width: 95%;
+  margin: 0;
+  padding: 0.8rem;
+  transform: translateX(0);
+  transition: all 0.5s ease-out;
+  font-size: 1rem;
+  text-align: left;
+}
+.accessMessage-container__closeBtn {
+  background-color: var(--b-color);
+  color: var(--w-color);
+  border: none;
+  border-radius: 10px;
+  padding: 0.2rem 0.4rem;
+  margin-top: 0.3rem;
+  font-size: 0.8rem;
+}
+
 .login-register-sec {
   min-height: 100vh;
   display: flex;
@@ -51,6 +78,9 @@ body {
   padding: 0.2rem 0.6rem;
   font-size: 1.1rem;
   outline: none;
+}
+.login-register-sec__form--inpts .error-message {
+  color: red;
 }
 .login-register-sec__form--submit {
   border: 0.5px solid var(--o-color);
@@ -223,8 +253,10 @@ body {
 .appInfo-sec__div--title {
   font-size: 1.6rem;
   margin-bottom: 1rem;
+  overflow: hidden;
 }
 .appInfo-sec__div--desc {
+  overflow: hidden;
   font-size: 1.1rem;
 }
 .appInfo-sec .divRight {
@@ -724,6 +756,10 @@ span {
   }
 }
 @media screen and (min-width: 768px) {
+  .accessMessage-container {
+    width: 98%;
+    left: 1%;
+  }
   .home-sec__header {
     width: 98%;
   }

@@ -7,7 +7,6 @@ export default function WeekTimeUse() {
   const [weeklyData, setWeeklyData] = useState([]);
 
   useEffect(() => {
-
         axios.get(`${import.meta.env.VITE_BACK_URI}/Timer/WeekTimerUse`, {withCredentials:true})
           .then(response =>
             setWeeklyData(response.data)
@@ -17,6 +16,9 @@ export default function WeekTimeUse() {
           )
     }
   , []);
+
+  console.log(weeklyData)
+
 
   return (
     <div className='weekUssage-container'>

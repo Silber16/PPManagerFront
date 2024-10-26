@@ -631,7 +631,7 @@ body {
 
 .createModal {
     z-index: 100;
-    position: fixed;
+    position: absolute;
     background-color:var(--w-color);
     padding: 1.7rem;
     text-align: left;

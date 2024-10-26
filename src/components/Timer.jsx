@@ -39,6 +39,7 @@ export default function Timer() {
       clearInterval(intervalId);
 
       sendTimeToBackend(timeDiff, startTime, now);
+      console.log(timeDiff)
       window.location.reload()
     }
 
