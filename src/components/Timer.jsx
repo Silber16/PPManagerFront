@@ -40,7 +40,7 @@ export default function Timer() {
 
       sendTimeToBackend(timeDiff, startTime, now);
       console.log(timeDiff)
-      window.location.reload()
+     
     }
 
   };

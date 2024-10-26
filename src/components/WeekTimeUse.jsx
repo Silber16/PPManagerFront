@@ -37,6 +37,7 @@ export default function WeekTimeUse() {
           <p style={{textAlign:'center'}}>You have not worked any time yet</p>
         )
         }
+        <button onClick={() => window.location.reload()}>reload</button>
       </ul>
     </div>
   );
