@@ -7,7 +7,7 @@ export default function AccessMessage() {
   useEffect(() => {
      setTimeout(() => {
         setHideMessage(true)
-     }, 12000);
+     }, 10000);
   }, [])
   
 

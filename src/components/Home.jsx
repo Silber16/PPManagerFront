@@ -24,7 +24,6 @@ export default function Home() {
     
   return (
     <>
-       <AccessMessage /> 
        <section className="home-sec">
        {isLoggedIn ? 
        (
@@ -39,6 +38,7 @@ export default function Home() {
        : 
        (
             <>
+                <AccessMessage /> 
                 <header className="home-sec__header">
                     <h1 className="home-sec__header--title"><a href="#">ProjectPilot</a></h1>
                 </header>
