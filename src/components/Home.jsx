@@ -10,6 +10,7 @@ import AccessMessage from "./AccessMessage"
 export default function Home() {
 
     const [isLoggedIn, setIsLoggedIn] = useState(false)
+    const under_maintenance = true //temporal
 
     useEffect(() => {
         axios.get(`${import.meta.env.VITE_BACK_URI}/Account/CheckAuth`, { withCredentials: true })
@@ -25,7 +26,7 @@ export default function Home() {
     return (
         <>
             <section className="home-sec">
-                {import.meta.env.UNDER_MAINTENANCE == 'Y'
+                {under_maintenance
                     ? (
                         <>
                             <header className="home-sec__header">
